@@ -1,0 +1,29 @@
+alert tcp any 4444 -> any any (\
+    msg:"PROBABLE reverse_tcp from Metasploit";\
+    flow:from_server;\
+    content:"|c4 0c 85 c0 75 0b a1 ec ab 02 10 40 a3 ec ab 02 10 89|";\
+    depth:18;\
+    offset:0;\
+    fast_pattern;\
+    classtype:trojan-activity;\
+    priority:1;\
+    reference:url,https://attack.mitre.org/techniques/T1059/001/;\
+    sid:1000005;\
+    rev:2;\
+)
+
+alert tcp any 4444 -> any any (msg: Connection to remote IP on port 4444; sid:1000002; rev:1;)
+
+alert tcp any 4444 -> any any (\
+    msg:"PROBABLE connection with Meterpreter";\
+    flow:from_server;\
+    content:"|ff 75 08 68 04 00 02 00 ff 75 10 e8 d5 fa ff ff 6a 00|";\
+    depth:18;\
+    offset:0;\
+    fast_pattern;\
+    classtype:trojan-activity;\
+    priority:1;\
+    reference:url,https://attack.mitre.org/techniques/T1059/001/;\
+    sid:1000006;\
+    rev:2;\
+)

@@ -1,0 +1,4 @@
+gophish==0.5.1
+requests
+urllib3
+six
